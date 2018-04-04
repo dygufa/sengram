@@ -1,8 +1,12 @@
+require('dotenv').config({ silent: true });
 import * as express from "express";
 import webhook from "./webhook";
+import * as bodyParser from "body-parser";
 
 const app = express();
 
-app.get("/webhook", webhook);
+app.use(bodyParser.json());
 
-app.listen(3000);
+app.all("/webhook", webhook);
+
+app.listen(3000, () => console.log("Rodando na porta 3000"));
