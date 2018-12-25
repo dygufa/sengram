@@ -8,7 +8,7 @@ function sanitize(message: string) {
 export default function webhook(req: Request, res: Response) {
     const body = req.body;
 
-    const message = `*Projeto*: ${sanitize(body.project_name)} \n*Mensagem*: ${sanitize(body.message)} \n*Url*: ${body.url}`;
+    const message = `*Projeto*: ${sanitize(body.project_name)} \n*Mensagem*: ${sanitize(body.message)} \n*Url*: ${sanitize(body.url)}`;
 
     telegram.sendMessage(message);
     res.end();
