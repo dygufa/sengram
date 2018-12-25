@@ -12,6 +12,7 @@ const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
 
 
 export function sendMessage(message: string) {
+    console.log(`Sending: ${message}`);
     bot.sendMessage(process.env.TELEGRAM_CHAT_ID!, message, {
         parse_mode: "Markdown"
     }).then(res => {
