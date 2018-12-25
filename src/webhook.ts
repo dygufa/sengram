@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import * as telegram from "./telegram";
 
 function sanitize(message: string) {
-    return message.replace(/(\*|\_|\~)/g, x => `\\${x}`);
+    return message.replace(/(\*|\_|\~|\`)/g, x => `\\${x}`);
 }
 
 export default function webhook(req: Request, res: Response) {
