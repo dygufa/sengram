@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sengram-app
+  namespace: sengram
+spec:
+  selector:
+    matchLabels:
+      app: sengram-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sengram-app
+    spec:
+      imagePullSecrets:
+        - name: gitlab-registry
+      containers:
+        - name: sengram-app
+          image: registry.gitlab.com/dygufa/sengram:v$CI_PIPELINE_ID
+          env:
+            - name: TELEGRAM_CHAT_ID
+              value: "$TELEGRAM_CHAT_ID"
+            - name: TELEGRAM_BOT_TOKEN
+              value: $TELEGRAM_BOT_TOKEN
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 1
+          ports:
+            - containerPort: 3000
+              name: http
+          resources:
+            limits:
+              memory: 600Mi
+              cpu: 500m
+            requests:
+              memory: 50Mi
+              cpu: 5m
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: sengram-app
+  namespace: sengram
+spec:
+  ports:
+    - name: http
+      port: 3000
+  selector:
+    app: sengram-app
+---

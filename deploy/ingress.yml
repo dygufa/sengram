@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sengram-ingress
+  namespace: sengram
+spec:
+  rules:
+  - host: sengram.dygufa.com
+    http:
+      paths:
+      - backend:
+          serviceName: sengram-app
+          servicePort: 8000
+---

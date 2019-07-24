@@ -7,6 +7,12 @@ const app = express();
 
 app.use(bodyParser.json());
 
+app.get("/status", (req, res) => {
+    res.json({
+        ok: true
+    });
+})
+
 app.all("/webhook", webhook);
 
 app.listen(3000, () => console.log("Rodando na porta 3000"));
