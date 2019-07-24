@@ -23,6 +23,7 @@ deploy:
     - kubectl config set-credentials gitlab --token="${USER_TOKEN}"
     - kubectl config set-context default --cluster=k8s --user=gitlab
     - kubectl config use-context default
+    - sed -i "s/\$CI_PIPELINE_ID/${CI_PIPELINE_ID}/g" deploy/app.yml
     - sed -i "s/\$TELEGRAM_CHAT_ID/${TELEGRAM_CHAT_ID}/g" deploy/app.yml
     - sed -i "s/\$TELEGRAM_BOT_TOKEN/${TELEGRAM_BOT_TOKEN}/g" deploy/app.yml
     - cat deploy/*.yml > tmp
