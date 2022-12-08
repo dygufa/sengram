@@ -9,7 +9,7 @@
     "@types/node-telegram-bot-api": "^0.28.2",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "node-telegram-bot-api": "^0.30.0",
     "typescript": "^2.8.1"
   }
